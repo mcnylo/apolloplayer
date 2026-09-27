@@ -1,51 +1,130 @@
-<h1>Apollo Player v1.1.07</h1>
-
-Last Updated: 12 April 2024 9:32 PM CST
-
-Any questions or bug reports should be emailed to michaelcmcniel@gmail.com
-
-Thank you!
-
 ![apollo_player](https://github.com/michaelmcniel65/apolloplayer/assets/100385832/af85e666-cd56-4846-a1bb-0dc8b46e57bc)
 
-<h2>Demo Video</h2>
-https://www.youtube.com/watch?v=Cyf2IESyITs
+# Apollo Player
 
-<h2>About</h2>
-Apollo Player is a music player written in C# using NAudio, a .NET audio library from Mark Heath (https://github.com/naudio/NAudio) in WPF.
+Apollo Player is a desktop music player for Windows. It is written in C# with WPF and uses NAudio for audio playback. The application provides local music-library management, standard playback controls, shuffle, track repeat, seeking, and a custom interface.
 
-The entire program is written in C# using 900 lines of code. It averages 150 MB of memory usage when playing a song. I did my absolute best to keep as much memory cleared as possible and use good rules of thumb when it comes to creating a WPF application. The goal was to create a music player that did not depend on the included Windows Media Player library in order to challenge myself and make something that I could potentially port over to Linux. The real grind was making NAudio work with WPF as it was initially made for WinForms. Luckily, NAudio proved to work extremely well and I'm able to deliver one of my coolest projects to date.
+**Current version:** 1.1.07
 
-CHANGE LOG
-----------
+## Features
 
-1.0.00
-- Initial Build
+- Play MP3 and WAV files.
+- Play, pause, stop, skip, and restart tracks.
+- Move through the library with previous and next controls.
+- Continue automatically when a track ends.
+- Shuffle tracks without immediately repeating a used track.
+- Return to earlier tracks during shuffle playback.
+- Repeat the selected track.
+- Seek to a different position in a track.
+- View the current time and total track time.
+- Adjust the volume or mute the audio.
+- Import multiple audio files at one time.
+- Remove tracks from the local music library.
+- Scroll long track names across the current-track display.
+- Use a custom borderless WPF interface with embedded images, animation, and fonts.
 
-1.0.01
-- Fixed a bug where the app would freeze if the play button was pressed twice
+## Supported Audio Formats
 
-1.0.02
-- Changed music file folder to the built in Windows Music folder
-- Fixed bug where the next song wouldn't play automatically
+Apollo Player recognizes these file types:
 
-1.0.03
-- Fixed a bug where the app would crash if a song that is playing is deleted
+- MP3 (`.mp3`)
+- WAV (`.wav`)
 
-1.0.04
-- Fixed a bug where songs would overlap after playing a different song if no song was selected (the default song would overlap
-	the currently playing song)
-1.0.05
-- Fixed a bug where the app would crash after pausing then playing a song
+## Music Library
 
-1.1.06
-- Fixed a bug where the app would crash if the pause button was clicked and no song was playing
-- Stylized the song list scroll bar
-- Added the ability for the current song display to scroll from right to left to show full name of file
-- Formatted the names of the songs in the song list to include "..." if the song is too long
+Apollo Player uses the current user's Windows Music folder as its music library. The application reads supported audio files from the top level of this folder when it starts.
 
-1.1.07
-- Fixed a bug where app would freeze after 20 minutes of use. Deleted line of code that allowed only software rendering
-- Set the volume to be max on start
-- Changed the formatted text to be 2 characters shorter
-- Set the music list font to the included font resource to show up on other computers
+The **Import** button copies selected MP3 and WAV files into the Windows Music folder. If a file with the same name already exists, the application asks for permission before it replaces the file.
+
+> [!WARNING]
+> The **Remove** button deletes the selected audio file from the Windows Music folder. It does not only remove the track from the displayed list. The application does not move the deleted file to the Recycle Bin.
+
+Apollo Player does not scan subfolders.
+
+## Requirements
+
+To build and run Apollo Player from source, you need:
+
+- A Windows operating system
+- The [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- Git
+- Visual Studio 2022 with the **.NET desktop development** workload, or the .NET command-line interface
+
+## Install and Run
+
+Prebuilt Windows installers are available in the [`Apollo Player Setup, ReadMe, Icon`](https://github.com/mcnylo/apolloplayer/tree/master/Apollo%20Player%20Setup%2C%20ReadMe%2C%20Icon) folder.
+
+1. Open the installer folder.
+2. Select an `.msi` installer.
+3. Download the installer.
+4. Run the downloaded file.
+5. Follow the instructions in the installation wizard.
+6. Open Apollo Player after the installation is complete.
+
+## Usage
+
+1. Put MP3 or WAV files in your Windows Music folder, or select **Import** in Apollo Player.
+2. Select a track from the music list.
+3. Select **Play**.
+4. Use the playback controls to pause, stop, seek, or change tracks.
+5. Enable shuffle or repeat when required.
+6. Use the volume control to adjust or mute the audio.
+
+If you select **Play** without selecting a track, Apollo Player starts the first track in the music list.
+
+## Technology
+
+| Technology | Purpose |
+| --- | --- |
+| C# | Application logic |
+| .NET 8 | Application runtime and build platform |
+| WPF | Desktop interface |
+| XAML | Interface layout and control styles |
+| [NAudio 2.2.1](https://github.com/naudio/NAudio) | Audio file reading and playback |
+| [XamlAnimatedGif 2.2.3](https://github.com/XamlAnimatedGif/XamlAnimatedGif) | GIF animation in the WPF interface |
+
+## Version History
+
+### 1.1.07
+
+- Corrected a freeze that could occur after extended playback.
+- Updated the initial volume behavior.
+- Adjusted long track-name formatting.
+- Embedded the music-list font for use on other computers.
+
+### 1.1.06
+
+- Prevented an error when the pause button is selected without an active track.
+- Added a custom scrollbar to the music list.
+- Added scrolling text for the current track name.
+- Shortened long names in the music list with an ellipsis.
+
+### 1.0.05
+
+- Prevented an error when playback resumes after a pause.
+
+### 1.0.04
+
+- Prevented overlapping playback when no track is selected.
+
+### 1.0.03
+
+- Prevented an error when the active track is deleted.
+
+### 1.0.02
+
+- Changed the library location to the Windows Music folder.
+- Corrected automatic playback of the next track.
+
+### 1.0.01
+
+- Prevented a freeze when the play button is selected twice.
+
+### 1.0.00
+
+- Created the initial release.
+
+## Acknowledgments
+
+- [NAudio](https://github.com/naudio/NAudio) provides audio reading and playback support.
+- The current-track marquee was adapted from [Razan Paul's Silverlight marquee example](https://asp-blogs.azurewebsites.net/razan/a-simple-text-marquee-control-in-silverlight).
